@@ -20,16 +20,21 @@ function handleChange(url) {
   if (activeTab && startTime) {
     const duration = Math.floor((now - startTime) / 1000);
 
-    fetch("http://localhost:5000/api/activity", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token")
-      },
-      body: JSON.stringify({
-        site: activeTab,
-        duration
-      })
+    chrome.storage.local.get(["token"], (result) => {
+      const token = result.token;
+      if (!token) return;
+
+      fetch("http://localhost:5000/api/activity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+          site: activeTab,
+          duration
+        })
+      });
     });
   }
 
