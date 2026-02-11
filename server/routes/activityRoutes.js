@@ -1,7 +1,6 @@
 const router = require("express").Router();
-const auth = require("../middleware/authMiddleware");
 const { addActivity } = require("../controllers/activityController");
 
-router.post("/", auth, addActivity);
+router.post("/", addActivity);
 
 module.exports = router;

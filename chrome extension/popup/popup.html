@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="popup.css" />
+  <title>Productivity</title>
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <h2>Productivity Tracker</h2>
 
-  <div id="user"></div>
+  <h2>Productivity Dashboard</h2>
+    <div class="current">
+  <div>Current Site:</div>
+  <b id="currentSite">-</b>
+  <div id="liveTime"></div>
+  <button id="blockBtn">Block This Site</button>
+</div>
 
-  <button id="report">View Report</button>
-  <button id="logout">Logout</button>
+  <div class="stats">
+    <div>Total: <b id="total"></b></div>
+    <div>Productive: <b id="productive"></b></div>
+    <div>Distracting: <b id="distracting"></b></div>
+    <div>Score: <b id="score"></b></div>
+    <div>Top Site: <b id="top"></b></div>
+  </div>
 
-  <script src="popup.js"></script>
+  <button id="toggleTracking"></button>
+
+  <div id="report"></div>
+
+<script src="popup.js"></script>
 </body>
 </html>
