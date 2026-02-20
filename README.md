@@ -1,162 +1,136 @@
-# 🚀 Productivity Tracker Chrome Extension
+Productivity Tracker – Chrome Extension--
 
-A full-stack productivity monitoring system that tracks time spent on websites, analyzes behavior, highlights distractions, and allows smart blocking.
+Productivity Tracker is a full-stack Chrome Extension that monitors the time spent on websites, analyzes browsing behavior, highlights distractions, and allows blocking unproductive sites.
+The project is built using Chrome Extension APIs for tracking and a Node.js + Express + MongoDB backend for storing and analyzing usage data.
+This project focuses on real-time tracking, behavior analysis, background service workers, and building a small but complete product experience.
 
-Built using **Chrome Extension APIs + Node.js + Express + MongoDB**.
+1. What This Project Does:-
 
-This project demonstrates real-time activity tracking, backend aggregation, analytics generation, and enforcement features similar to commercial tools like RescueTime.
+-Tracks how long a user stays on each website
+-Detects tab switches automatically
+-Stores browsing duration in MongoDB
+-Calculates total time spent
+-Separates productive and distracting time
+-Calculates a productivity score
+-Shows most visited website
+-Displays the currently active website
+-Shows a live timer for the current tab
+-Allows blocking of distracting websites
+-Lets users toggle tracking ON/OFF
+-This project is not just about storing data — it also interprets it and gives insights.
 
----
+2. Tech Stack:-
 
-## 1. Features
+Frontend (Chrome Extension)-
 
-### 1.1 Time Tracking
-1. Automatically tracks time spent on each website.
-2. Detects tab switching in real time.
-3. Stores usage duration in MongoDB.
+-Manifest V3
+-JavaScript
+-Chrome Tabs API
+-Chrome Storage API
 
-### 1.2 Productivity Analytics
-1. Total browsing time.
-2. Productive vs distracting time.
-3. Productivity score (%).
-4. Most visited website.
-5. Sorted ranking.
+Backend-
 
-### 1.3 Live Monitoring
-1. Displays the current active site.
-2. Shows live timer.
+-Node.js
+-Express.js
+-MongoDB
+-Mongoose
 
-### 1.4 Website Blocking
-1. Block the current site with one click.
-2. Background service worker enforces redirection.
+3. How It Works:-
 
-### 1.5 Control
-1. Toggle tracking ON / OFF anytime.
+-The extension listens for active tab changes using the Chrome Tabs API.
+-When the user switches tabs, the previous tab’s time is calculated.
+-The extension sends the site name and duration to the backend.
+-The backend stores this data in MongoDB.
+-When the popup is opened, it fetches aggregated data from /api/report.
+-The popup calculates:
+1.Total time
+2.Productive time
+3.Distracting time
+4.Productivity percentage
+5.Most used site
+6.If a site is blocked, the background script automatically redirects it.
+7.The tracking logic runs in a background service worker, so it works even when the popup is closed.
 
-### 1.6 Auto Updates
-1. Dashboard refreshes automatically.
+4. Project Structure:-
 
----
-
-## 2. How It Works
-
-Browser Activity
-Chrome Extension (background.js)
-POST → Backend API
-MongoDB stores activity
-Popup fetches /report
-Analytics + UI rendering
-
-
----
-
-## 3. Tech Stack
-
-### 3.1 Frontend (Chrome Extension)
-1. Chrome Manifest v3  
-2. JavaScript  
-3. Chrome Tabs API  
-4. Chrome Storage API  
-
-### 3.2 Backend
-1. Node.js  
-2. Express.js  
-3. MongoDB (Mongoose)  
-
----
-
-## 4. Project Structure
-
-productivity-tracker/
+Productivity-Tracker
 │
-├── chrome-extension/
+├── chrome-extension
 │ ├── manifest.json
 │ ├── background.js
-│ └── popup/
+│ └── popup
 │ ├── popup.html
 │ ├── popup.js
 │ └── popup.css
 │
-└── server/
-├── controllers/
-├── models/
-├── routes/
+└── server
+├── controllers
+├── models
+├── routes
 └── server.js
 
+5. Running the Project Locally:-
 
----
+Step 1 – Start Backend
 
-## 5. Setup Instructions
-
-### 5.1 Start Backend
-
-```bash
-cd server
-npm install
-node server.js
-Server runs at:
+cd server  
+npm install  
+node server.js  
+Backend runs at:
 http://localhost:5000
 
-5.2 Load Extension in Chrome
+Step 2 – Load the Extension
 
-Open
-chrome://extensions
+Open Chrome
+Go to: chrome://extensions
+Enable Developer Mode
+Click “Load Unpacked”
+Select the chrome-extension folder
 
-Enable Developer Mode.
-Click Load Unpacked.
-Select the chrome-extension folder.
+Step 3 – Start Browsing
 
-5.3 Start Browsing
+Visit different websites
+Switch between tabs
+Open the extension popup to see analytics
 
-Visit websites.
-Activity will automatically start saving.
+6. Features Implemented:-
 
-5.4 View Dashboard
+-Real-time tab tracking
+-Automatic duration calculation
+-Backend aggregation using MongoDB
+-Productivity score calculation
+-Productive vs distracting classification
+-Live current-site detection
+-Website blocking
+-Tracking toggle switch
+-Auto-updating dashboard
 
-Click the extension icon to see:
-Total time
-Productivity score
-Top site
-Ranked website list
-Live timer
-Block button
+7. Example Output:-
 
-6. API Endpoints
-
-6.1 Save Activity
-POST /api/activity
-6.2 Get Report
-GET /api/report
-
-7. What Makes This Project Strong
-
-This is not just a CRUD app.
-It demonstrates:
-->Event-driven browser tracking
-->Background workers
-->Real-time analytics
-->Behavioral classification
-->Client ↔ server communication
-->Database aggregation
-->Enforcement via blocking
-->Automatic UI updates
-
-8. Example Output
-Total: 2h 10m  
-Productive: 1h 20m  
-Distracting: 50m  
-Score: 62%  
+Total: 2h 10m
+Productive: 1h 20m
+Distracting: 50m
+Score: 62%
 
 Top Site → github.com
-9. Future Enhancements
 
-->Pie charts & visual graphs
-->Weekly/monthly trends
-->AI productivity suggestions
-->Focus sessions
-->Temporary unblock
-->Cloud sync
-->Multi-user system
+8. Possible Improvements:-
 
-10. Author
-Prateek
+-Pie charts and visual graphs
+-Weekly and monthly summaries
+-Focus mode with time limits
+-Smart auto-block after threshold
+-User authentication system
+-Cloud sync across devices
+-AI-based productivity suggestions
+
+9. Why I Built This
+
+-This project was built to understand:
+-Event-driven programming in browser extensions
+-Background service workers in Manifest V3
+-Real-time tracking logic
+-Data aggregation in MongoDB
+-Behavior classification
+-Designing a small but complete product
+-The goal was to build something practical, not just a CRUD application.
